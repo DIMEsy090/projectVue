@@ -1,11 +1,7 @@
 <template>
   <div class="app">
-    <post-form
-        @create = 'createPost'
-    />
-    <post-list
-        :posts="posts"
-    />
+    <post-form @create="createPost" />
+    <post-list :posts="posts" @remove="removePost" />
   </div>
 </template>
 
@@ -14,24 +10,28 @@ import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
 export default {
   components: {
-    PostList,PostForm
+    PostList,
+    PostForm,
   },
   data() {
     return {
       posts: [
-        {id: 1, title: "Javascript", body: "Описание поста"},
-        {id: 2, title: "Javascript 2", body: "Описание поста 2"},
-        {id: 3, title: "Javascript 3", body: "Описание поста 3"},
-        {id: 3, title: "Javascript 4", body: "Описание поста 4"},
-      ]
-    }
+        { id: 1, title: "Javascript", body: "Описание поста" },
+        { id: 2, title: "Javascript 2", body: "Описание поста 2" },
+        { id: 3, title: "Javascript 3", body: "Описание поста 3" },
+        { id: 3, title: "Javascript 4", body: "Описание поста 4" },
+      ],
+    };
   },
-  methods:{
+  methods: {
     createPost(post) {
       this.posts.push(post);
-    }
-  }
-}
+    },
+    removePost(post) {
+      this.posts = this.posts.filter((p) => p.id !== post.id);
+    },
+  },
+};
 </script>
 
 <style>
@@ -45,8 +45,6 @@ export default {
   padding: 20px;
 }
 
-
-
 form {
   display: flex;
   flex-direction: column;
@@ -58,5 +56,4 @@ form {
   padding: 10px 15px;
   margin-top: 15px;
 }
-
 </style>

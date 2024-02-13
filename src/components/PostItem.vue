@@ -1,14 +1,12 @@
 <template>
-  <div class="post" >
+  <div class="post">
     <div>
       <div><strong>Название:</strong> {{ post.title }}</div>
       <div><strong>Описание:</strong> {{ post.body }}</div>
     </div>
-  <div class="post__btns">
-    <my-button>Удалить</my-button>
-
-  </div>
-
+    <div class="post__btns">
+      <my-button @click="$emit('remove', post)">Удалить</my-button>
+    </div>
   </div>
 </template>
 
@@ -16,15 +14,14 @@
 import MyButton from "@/components/UI/MyButton.vue";
 
 export default {
-  components: {MyButton},
+  components: { MyButton },
   props: {
-    post:{
-      type: Object,
-      required:true,
-    }
-  }
-
-}
+    post: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped>
